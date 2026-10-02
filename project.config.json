@@ -1,0 +1,169 @@
+{
+  "_note": "Edit these values, then run `npm run build`. Every design and video reads from this file. Check items listed under _verify before publishing.",
+  "company": {
+    "name": "Specialist Welding Solutions Co. for Industrial",
+    "short": "SWS",
+    "tagline": "Engineered. Fabricated. Delivered.",
+    "nameAr": "شركة حلول اللحام المختص للصناعة",
+    "credential": "Aramco Approved Vendor · 10118949",
+    "location": "Dammam 2nd Industrial City, KSA",
+    "email": "INFO@SWSWELD.COM",
+    "logos": {
+      "onLight": "assets/logo/sws-logo.png",
+      "onDark": "assets/logo/sws-logo-white.png",
+      "markOnLight": "assets/logo/sws-mark.png",
+      "markOnDark": "assets/logo/sws-mark-white.png",
+      "watermark": "assets/logo/sws-logo-mono-white.png"
+    },
+    "cr": "CR 2050082045"
+  },
+  "project": {
+    "title": "SCADA Room",
+    "titleLines": [
+      "SCADA",
+      "Room Delivered"
+    ],
+    "kicker": "Project Delivered",
+    "subtitle": "40 ft High-Cube E-House — SCADA Room",
+    "headlineAr": "غرفة SCADA — تسليم خلال 8 أيام و16 ساعة",
+    "subAr": "هندسة · تصنيع · طلاء · تجهيز كهربائي — بالكامل داخل مصنعنا",
+    "clientLine": "A major pipeline project in the Eastern Province",
+    "location": "Eastern Province, KSA",
+    "year": "2026",
+    "scope": [
+      "HEB 240 Skid & Lifting Trunnions",
+      "Platforms & Stairs",
+      "Sandwich Panels & Checker Plate",
+      "Primer & Coating System",
+      "Power Distribution & Cable Trays",
+      "3 Split A/C Units · Fire & Gas"
+    ],
+    "phases": [
+      {
+        "label": "Engineering",
+        "detail": "GA drawings issued 22 Sep 2026"
+      },
+      {
+        "label": "Fabrication",
+        "detail": "HEB 240 skid, trunnions, platforms & stairs"
+      },
+      {
+        "label": "Fit-Out",
+        "detail": "Coating, panels, power distribution, A/C, fire & gas"
+      },
+      {
+        "label": "Presented",
+        "detail": "Presented to the client — 30 Sep 2026"
+      },
+      {
+        "label": "Dispatched",
+        "detail": "Crane-lifted, loaded & dispatched — 30 Sep 2026"
+      }
+    ],
+    "specs": [
+      [
+        "Shelter",
+        "40 ft high-cube E-House"
+      ],
+      [
+        "Skid",
+        "HEB 240, HEB 180 supports"
+      ],
+      [
+        "Lifting",
+        "Lifting trunnions"
+      ],
+      [
+        "Access",
+        "Platforms & stairs"
+      ],
+      [
+        "Walls",
+        "Insulated sandwich panels"
+      ],
+      [
+        "Floor",
+        "Checker plate"
+      ],
+      [
+        "Finish",
+        "Primer & coating system"
+      ],
+      [
+        "Electrical",
+        "Power distribution, cable trays"
+      ],
+      [
+        "HVAC",
+        "3 split A/C units"
+      ],
+      [
+        "Safety",
+        "Fire & gas"
+      ]
+    ],
+    "stats": [
+      {
+        "value": "8",
+        "label": "Days · SCADA Room"
+      },
+      {
+        "value": "16",
+        "label": "Hours · SCADA Room"
+      },
+      {
+        "value": "3",
+        "label": "E-Houses in Package"
+      },
+      {
+        "value": "100%",
+        "label": "In-House"
+      }
+    ],
+    "quote": "Engineering to dispatch, fully in-house: the SCADA Room left our yard 8 days and 16 hours after GA drawings were issued.",
+    "quoteBy": "Mohammad Khraim — Acting General Manager",
+    "hashtags": [
+      "#SCADA",
+      "#EHouse",
+      "#ProjectDelivery",
+      "#SteelFabrication",
+      "#OilAndGas",
+      "#SaudiArabia",
+      "#Vision2030",
+      "#SWS"
+    ],
+    "headline": "8 Days. 16 Hours. One SCADA Room Delivered.",
+    "next": "Two Control Vanes to follow — planned mid-Oct 2026"
+  },
+  "_verify": [
+    "Client names stay hidden until written approval (see site/script.js SHOW_CLIENT_NAMES)"
+  ],
+  "photos": {
+    "hero": "assets/photos/hero-yard.jpg",
+    "loadoutNight": "assets/photos/loadout-night.jpg",
+    "loadoutNight2": "assets/photos/loadout-night-2.jpg",
+    "craneLift": "assets/photos/crane-lift.jpg",
+    "craneLiftWide": "assets/photos/crane-lift-wide.jpg",
+    "teamLift": "assets/photos/team-lift.jpg",
+    "teamFour": "assets/photos/team-four.jpg",
+    "teamNight": "assets/photos/team-night.jpg",
+    "welding": "assets/photos/welding.jpg",
+    "skidFrame": "assets/photos/skid-frame.jpg",
+    "boltedConnection": "assets/photos/bolted-connection.jpg",
+    "basePlate": "assets/photos/base-plate.jpg",
+    "dbPanel": "assets/photos/db-panel.jpg",
+    "interior": "assets/photos/interior.jpg",
+    "fireExit": "assets/photos/fire-exit.jpg",
+    "hvac": "assets/photos/hvac.jpg",
+    "inspection": "assets/photos/inspection.jpg",
+    "threeQuarter": "assets/photos/three-quarter.jpg",
+    "frontOpen": "assets/photos/front-open.jpg",
+    "side": "assets/photos/side.jpg",
+    "fatTeam": "assets/photos/fat-team.jpg",
+    "cableTray": "assets/photos/cable-tray.jpg",
+    "interiorWork": "assets/photos/interior-work.jpg",
+    "yardSide": "assets/photos/yard-side.jpg",
+    "fireCallpoint": "assets/photos/fire-callpoint.jpg",
+    "interiorInspection": "assets/photos/interior-inspection.jpg"
+  }
+}
