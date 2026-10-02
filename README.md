@@ -53,6 +53,11 @@ The grid, timeline, lightbox arrows and keyboard navigation mirror automatically
 Use the browser's **Print → Save as PDF** (A4). The print stylesheet hides the navigation, gallery, video and form. It lays out the hero, proof points, timeline, specification and credentials as a one-page sheet on white.
 
 ## Deploy
+**Live:** https://khraim1989.github.io/SCADA-Room-project-delivery-video/ (published from the `gh-pages` branch, which contains only this folder). To update it after editing `site/`, run from the repo root:
+```bash
+git subtree split --prefix site -b gh-pages-tmp && git push -f origin gh-pages-tmp:gh-pages && git branch -D gh-pages-tmp
+```
+
 **GitHub Pages**
 1. Push the repo to GitHub.
 2. Go to *Settings → Pages → Build and deployment → Deploy from a branch*.
