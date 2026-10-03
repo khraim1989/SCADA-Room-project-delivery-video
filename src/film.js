@@ -1,5 +1,5 @@
 // Motion-graphics film engine. Deterministic: seek(t) fully redraws the frame at time t.
-import { controlRoom, deliveryTruck, frameBuild, blueprint, coatingBay, util } from './illustrations.js';
+import { controlRoom, deliveryTruck, frameBuild, coatingBay, util } from './illustrations.js';
 const { clamp, ease, seg, rnd } = util;
 const outE = (x) => 1 - Math.pow(1 - clamp(x), 3);
 
@@ -89,8 +89,27 @@ const SC = {
   },
 
   engineering(lt, d) {
-    const ph = S.ctx.cfg.project.phases[0];
-    return artBox(blueprint({ t: lt, p: ease(clamp(lt / (d * .8))), id: 'en' }), lt, [1.0, 1.1], d) + label(lt, '01', ph.label, ph.detail) + bug(1);
+    // Real GA drawings (redacted) draw themselves on a drafting grid: sheet 1 isometric, then sheet 2 skid elevation.
+    const ph = S.ctx.cfg.project.phases[0], dw = S.ctx.cfg.drawings, land = S.fmt === 'land';
+    const geo = land ? 'left:30%;top:9%;width:66%;height:70%' : S.fmt === 'sq' ? 'left:5%;top:12%;width:90%;height:52%' : 'left:4%;top:13%;width:92%;height:48%';
+    const half = d * .52;
+    const sheet = (src, t0, t1) => {
+      const k = ease(clamp((lt - t0) / 1.7));
+      const op = clamp((lt - t0 + .2) / .4) * (t1 ? 1 - clamp((lt - t1) / .5) : 1);
+      if (op <= 0) return '';
+      const z = 1 + .05 * clamp((lt - t0) / (d - t0));
+      return `<div style="position:absolute;${geo};opacity:${op.toFixed(3)};transform:scale(${z.toFixed(4)})">
+        <img src="../${src}-light.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;clip-path:inset(0 ${((1 - k) * 100).toFixed(2)}% 0 0)"></div>`;
+    };
+    const chip = (txt, t0, t1) => {
+      const op = clamp((lt - t0) / .4) * (t1 ? 1 - clamp((lt - t1) / .4) : 1);
+      return op > 0 ? `<div class="mono" style="position:absolute;left:${px(4)};top:${px(4.2)};opacity:${op};font-size:${px(1.9)};letter-spacing:.12em;color:var(--orange-hi);border:1px solid rgba(255,138,76,.5);padding:${px(.6)} ${px(1.2)};background:rgba(10,11,13,.6)">${txt}</div>` : '';
+    };
+    return `<div class="layer" style="background:#111418"></div>
+      <div class="layer" style="background-image:linear-gradient(rgba(232,78,14,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(232,78,14,.07) 1px,transparent 1px),linear-gradient(rgba(232,78,14,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(232,78,14,.035) 1px,transparent 1px);background-size:${px(10)} ${px(10)},${px(10)} ${px(10)},${px(2)} ${px(2)},${px(2)} ${px(2)}"></div>
+      ${sheet(dw.iso, .15, half)}${sheet(dw.skidElevation, half, 0)}`
+      + label(lt, '01', ph.label, ph.detail)
+      + chip(`GA DRAWING · SHEET 1 OF 3 · ${dw.issued.toUpperCase()}`, .4, half) + chip(`GA DRAWING · SHEET 2 OF 3 · SKID HEB 240`, half + .2, 0) + bug(1);
   },
   fabrication(lt, d) {
     const ph = S.ctx.cfg.project.phases[1];
@@ -155,7 +174,7 @@ const SC = {
 const XF = .6;
 const TIMELINES = {
   full: [['intro', 4.5], ['title', 6], ['engineering', 5.5], ['fabrication', 8], ['fitout', 8], ['inspection', 5.5], ['loadout', 9], ['stats', 6.5], ['team', 5], ['outro', 6]],
-  short: [['intro', 3.2], ['title', 4.2], ['fabrication', 4.6], ['fitout', 4.2], ['loadout', 5.6], ['stats', 4.6], ['team', 3.4], ['outro', 4.4]],
+  short: [['intro', 3.2], ['title', 4.0], ['engineering', 4.4], ['fabrication', 4.2], ['fitout', 3.8], ['loadout', 5.2], ['stats', 4.4], ['team', 3.2], ['outro', 4.2]],
   sting: [['intro', 5]],
 };
 

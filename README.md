@@ -12,12 +12,12 @@ Everything is generated from **`project.config.json`**. To change it, edit the t
 | File | Size | Length | Use |
 |---|---|---|---|
 | `sws-scada-film-16x9.mp4` | 1920×1080 | ~59 s | Main project film: LinkedIn, YouTube, website, client presentations |
-| `sws-scada-reel-9x16.mp4` | 1080×1920 | ~30 s | Instagram/LinkedIn Reels, Stories, TikTok, WhatsApp Status |
-| `sws-scada-feed-1x1.mp4` | 1080×1080 | ~30 s | LinkedIn / Facebook feed |
-| `sws-scada-feed-4x5.mp4` | 1080×1350 | ~30 s | Instagram feed |
+| `sws-scada-reel-9x16.mp4` | 1080×1920 | ~32 s | Instagram/LinkedIn Reels, Stories, TikTok, WhatsApp Status |
+| `sws-scada-feed-1x1.mp4` | 1080×1080 | ~32 s | LinkedIn / Facebook feed |
+| `sws-scada-feed-4x5.mp4` | 1080×1350 | ~32 s | Instagram feed |
 | `sws-scada-logo-sting-16x9.mp4` | 1920×1080 | 5 s | Logo intro/outro for any other video |
 
-Film storyboard: Logo reveal → Title → 01 Engineering (GA drawings 22 Sep) → 02 Fabrication → 03 Fit-Out → 04 Presented → 05 Dispatched (30 Sep) → Key figures → Team thank-you → Brand outro.
+Film storyboard: Logo reveal → Title → 01 Engineering (the real GA drawings draw themselves on screen: sheet 1 isometric, sheet 2 skid) → 02 Fabrication → 03 Fit-Out → 04 Presented → 05 Dispatched (30 Sep) → Key figures → Team thank-you → Brand outro.
 
 ### Photo designs (`output/photos/`)
 | File | Size | Use |
@@ -29,6 +29,7 @@ Film storyboard: Logo reveal → Title → 01 Engineering (GA drawings 22 Sep) �
 | `post-thank-you` | 1200×1200 | Team & client appreciation |
 | `post-speed-record` | 1080×1080 | 8 days / 16 hours (SCADA Room) |
 | `post-spec-sheet` | 1080×1350 | SCADA Room specification |
+| `post-engineering` | 1080×1350 | Real GA drawings (isometric + skid elevation) with key dimensions |
 | `post-collage` | 1080×1350 | Behind-the-build photo grid |
 | `post-arabic` | 1080×1080 | Arabic announcement |
 | `linkedin-banner` | 1584×396 | LinkedIn page/profile cover |
@@ -41,6 +42,17 @@ Film storyboard: Logo reveal → Title → 01 Engineering (GA drawings 22 Sep) �
 All 26 curated project photos with the SWS logo frame, in 16:9 and 4:5.
 
 `output/captions.md` has ready-to-post copy (LinkedIn company and personal, Instagram, Arabic) and a 2-week posting sequence.
+
+## Engineering drawings (`assets/drawings/`)
+GA drawing **SWS-2286 Rev 0**, sheets 1 and 2 of 3, issued 22 Sep 2026. Sheet 3 was not supplied. The PDFs are **redacted**: the client name is replaced with "(withheld)" and the internal CAD file path is removed. They are flattened to images at 300 dpi, so the removed text can't be recovered.
+
+| File | Content |
+|---|---|
+| `ga-sheet-1-redacted.pdf` / `ga-sheet-1.png` | Isometric view, plan, side elevation (12,192 × 2,894 mm; 1,585 mm skid) |
+| `ga-sheet-2-redacted.pdf` / `ga-sheet-2.png` | Skid plan, skid elevation (3 × 3,000 + 2,952 mm bays), section A-A |
+| `ga-*-ink.png` / `ga-*-light.png` | Individual views cut from the sheets on transparent backgrounds: `ink` for light designs, `light` for dark designs |
+
+These drawings replace the earlier illustrated blueprint everywhere: the film and short cuts' engineering scene, carousel slide 3, the A3 poster, the new engineering post and the website's "Drawings" section. Keep the unredacted originals off this public repo.
 
 ## Photos
 Curated from the project Drive folder, resized to 2400 px, metadata stripped, phone watermarks cropped. Each design picks photos by **role** (`project.config.json → photos`, e.g. `hero`, `craneLift`, `welding`). To swap a photo, drop the new file in `assets/photos/`, point the role at it and run `npm run build`. `npm run brand-photos` frames every photo in `assets/photos/`.

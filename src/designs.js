@@ -1,12 +1,11 @@
 // Static designs (PNG/PDF). Each entry: { w, h, scale?, transparent?, pdf?, carousel?, render(ctx) → html }.
 // Photos are referenced by role (project.config.json → photos). Missing roles fall back to vector illustrations.
-import { controlRoom, deliveryTruck, frameBuild, blueprint, coatingBay } from './illustrations.js';
+import { controlRoom, deliveryTruck, frameBuild, coatingBay } from './illustrations.js';
 
 const art = {
   room: () => controlRoom({ t: 3.2, id: 'r' }),
   truck: () => deliveryTruck({ t: 1, p: .59, id: 't' }),
   frame: () => frameBuild({ t: 1.3, p: .9, id: 'f' }),
-  print: () => blueprint({ t: 1.6, p: 1, id: 'b' }),
   coat: () => coatingBay({ t: 1, p: .62, id: 'c' }),
 };
 const FALLBACK = { hero: 'truck', loadoutNight: 'truck', loadoutNight2: 'truck', craneLift: 'truck', teamLift: 'frame', welding: 'frame', dbPanel: 'room', threeQuarter: 'truck', yardSide: 'truck' };
@@ -36,6 +35,11 @@ function stats(ctx, u, cols, size = 1) {
 
 const chips = (ctx, u, n = 6, fs = 1.9) =>
   `<div style="display:flex;flex-wrap:wrap;gap:${1.1 * u}px">${ctx.cfg.project.scope.slice(0, n).map((s) => `<span class="chip" style="font-size:${fs * u}px">${s}</span>`).join('')}</div>`;
+
+// Real GA drawing views (redacted). variant: 'light' for dark backgrounds, 'ink' for light ones.
+const dwg = (ctx, view, variant = 'light', style = '') =>
+  `<img src="../${ctx.cfg.drawings[view]}-${variant}.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;${style}">`;
+const grid = (u) => `background-color:#111418;background-image:linear-gradient(rgba(232,78,14,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(232,78,14,.08) 1px,transparent 1px),linear-gradient(rgba(232,78,14,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(232,78,14,.035) 1px,transparent 1px);background-size:${10 * u}px ${10 * u}px,${10 * u}px ${10 * u}px,${2 * u}px ${2 * u}px,${2 * u}px ${2 * u}px`;
 
 const title2 = (ctx) => { const [a, b] = ctx.cfg.project.titleLines; return `${a}<br><span class="accent">${b}</span>`; };
 
@@ -153,6 +157,23 @@ export const designs = {
       </div>${footer(ctx, u)}`;
   } },
 
+  // 8b. Engineering — real GA drawings
+  'post-engineering': { w: 1080, h: 1350, render(ctx) {
+    const u = 10.8, d = ctx.cfg.drawings;
+    const dim = (v, l) => `<div class="stat" style="padding-inline-start:${1.8 * u}px"><div class="v" style="font-size:${3.9 * u}px;white-space:nowrap">${v}</div><div class="l" style="font-size:${1.5 * u}px;margin-top:${.6 * u}px">${l}</div></div>`;
+    return `<div class="layer" style="${grid(u)}"></div>
+      <div style="position:absolute;left:${6 * u}px;top:${5 * u}px">${logo(ctx, 10 * u)}</div>
+      <div style="position:absolute;right:${6 * u}px;top:${6 * u}px;text-align:right">
+        <div class="kicker" style="font-size:${1.8 * u}px">Engineering · in-house</div>
+        <div class="disp" style="font-size:${5 * u}px;margin-top:${.8 * u}px">GA Drawings</div></div>
+      <div style="position:absolute;left:${3 * u}px;right:${3 * u}px;top:${19 * u}px;height:${46 * u}px">${dwg(ctx, 'iso')}</div>
+      <div style="position:absolute;left:${6 * u}px;right:${6 * u}px;top:${67 * u}px;height:${19 * u}px">${dwg(ctx, 'skidElevation')}</div>
+      <div class="mono" style="position:absolute;left:${6 * u}px;top:${88 * u}px;font-size:${1.6 * u}px;letter-spacing:.12em;color:var(--orange-hi)">${d.number.toUpperCase()} · SHEETS 1–2 OF 3 · ISSUED ${d.issued.toUpperCase()}</div>
+      <div style="position:absolute;left:${6 * u}px;right:${6 * u}px;top:${94 * u}px;display:grid;grid-template-columns:repeat(4,1fr);gap:${2 * u}px">
+        ${dim('12,192', 'mm overall · 40 ft HC')}${dim('2,894', 'mm shelter height')}${dim('1,585', 'mm skid height')}${dim('HEB 240', 'skid · 3,000 mm bays')}</div>
+      ${footer(ctx, u, 7)}`;
+  } },
+
   // 9. Spec sheet — data-plate facts (no PO numbers)
   'post-spec-sheet': { w: 1080, h: 1350, render(ctx) {
     const u = 10.8, p = ctx.cfg.project;
@@ -222,7 +243,7 @@ export const designs = {
         <div style="margin-top:${4.5 * u}px">${stats(ctx, u, 4, .78)}</div>
         <div style="margin-top:${4.5 * u}px;display:grid;grid-template-columns:repeat(5,1fr);gap:${2.4 * u}px">${p.phases.map(phase).join('')}</div>
         <div style="margin-top:${4 * u}px;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:${1.2 * u}px;height:${24 * u}px">
-          ${tile('welding', '55% 40%')}${tile('dbPanel', '40% 40%')}${tile('craneLift', '50% 35%')}</div>
+          <div style="position:relative;overflow:hidden;${grid(u * .6)}">${dwg(ctx, 'iso', 'light', 'inset:6%;width:88%;height:88%')}</div>${tile('welding', '55% 40%')}${tile('craneLift', '50% 35%')}</div>
       </div>
       <div class="footer" style="height:${6 * u}px;padding:0 ${6 * u}px;font-size:${1.4 * u}px"><span><b>${c.name}</b> · ${c.location}</span><span>${c.credential} · ${c.cr} · ${c.email}</span></div>`;
   } },
@@ -256,8 +277,8 @@ function slideBase(ctx, i, n, inner, role, pos) {
   const u = 10.8;
   let visual;
   if (role === 'blueprint') {
-    visual = `<div class="layer" style="background:#111315"></div><div class="layer bg" style="top:${16 * u}px;height:${56.25 * u}px;bottom:auto">${art.print()}</div>
-      <div class="layer" style="background:linear-gradient(180deg,#111315 ${16 * u}px,rgba(17,19,21,0) ${26 * u}px,rgba(17,19,21,0) ${52 * u}px,#111315 ${72 * u}px)"></div>`;
+    visual = `<div class="layer" style="${grid(u)}"></div><div style="position:absolute;left:${4 * u}px;right:${4 * u}px;top:${18 * u}px;height:${50 * u}px">${dwg(ctx, 'iso')}</div>
+      <div class="mono" style="position:absolute;left:${6 * u}px;top:${69 * u}px;font-size:${1.7 * u}px;letter-spacing:.12em;color:var(--orange-hi)">GA DRAWING ${ctx.cfg.drawings.number.toUpperCase()} · ISSUED ${ctx.cfg.drawings.issued.toUpperCase()}</div>`;
   } else if (role) {
     visual = `${bg(ctx, role, pos)}<div class="layer" style="background:linear-gradient(180deg,rgba(15,17,19,.88) 0%,rgba(15,17,19,.15) 20%,rgba(15,17,19,.15) 42%,rgba(15,17,19,.94) 66%,#0F1113 100%)"></div>`;
   } else visual = `<div class="layer" style="background:#111315"></div>`;

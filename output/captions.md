@@ -81,6 +81,6 @@ Drawings → steel → dispatch in 8 days, 16 hours ⚡
 | 3 | Reel / Story | `reel-9x16.mp4`, `story-delivered.png` |
 | 5 | Speed record | `post-speed-record.png` |
 | 7 | Arabic announcement | `post-arabic.png` |
-| 9 | Spec sheet | `post-spec-sheet.png` |
+| 9 | Spec sheet / GA drawings | `post-spec-sheet.png`, `post-engineering.png` |
 | 11 | Behind the build | `post-collage.png` |
 | 14 | Team thank-you | `post-thank-you.png` |
