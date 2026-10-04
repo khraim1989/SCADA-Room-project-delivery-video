@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>SWS Media Kit Stage</title>
+<link rel="stylesheet" href="kit.css"></head>
+<body><div id="stage"></div>
+<script type="module">
+import { designs } from './designs.js';
+import { film } from './film.js';
+const stage = document.getElementById('stage');
+const cfg = await (await fetch('../project.config.json')).json();
+const photos = await (await fetch('/__photos')).json().catch(() => []);
+const ctx = { cfg, photos: photos.map((p) => '../' + p) };
+
+async function settle() {
+  await document.fonts.ready;
+  await Promise.all([...stage.querySelectorAll('img')].map((i) => i.complete ? 0 : new Promise((r) => { i.onload = i.onerror = r; })));
+}
+window.KIT = {
+  list: () => Object.entries(designs).map(([id, d]) => ({ id, w: d.w, h: d.h, scale: d.scale || 1, transparent: !!d.transparent, pdf: d.pdf || null, carousel: d.carousel || false, dir: d.dir || null })),
+  async design(id) {
+    const d = designs[id];
+    stage.style.width = d.w + 'px'; stage.style.height = d.h + 'px';
+    stage.style.background = d.transparent ? 'transparent' : '';
+    document.body.style.background = document.documentElement.style.background = d.transparent ? 'transparent' : '#000';
+    stage.innerHTML = d.render(ctx);
+    await settle();
+  },
+  async filmSetup(fmt) { const info = film.setup(stage, ctx, fmt); await settle(); return info; },
+  async seek(t) { film.seek(t); await settle(); },
+};
+window.KIT_READY = true;
+</script></body></html>
