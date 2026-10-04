@@ -1,6 +1,6 @@
 # SWS: SCADA Room Delivery Media Kit
 
-**Case-study website:** see [`site/`](site/README.md).
+**Case-study website:** see [`site/`](site/README.md). **HVAC design package:** see [`hvac/`](hvac/README.md).
 
 Video and photo designs for the **SCADA Room**, a 40 ft high-cube E-House built by **Specialist Welding Solutions Co. for Industrial (SWS)** for a major pipeline project in the Eastern Province. It was delivered 8 days and 16 working hours after GA drawings were issued (dispatched 30 Sep 2026). All media uses the real project photos (`assets/photos/`). They use the official SWS logo and brand colours (SWS blue `#0E4194`, spark orange `#E84E0E`) on a charcoal base.
 
