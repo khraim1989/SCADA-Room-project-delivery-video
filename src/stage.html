@@ -15,7 +15,7 @@ async function settle() {
   await Promise.all([...stage.querySelectorAll('img')].map((i) => i.complete ? 0 : new Promise((r) => { i.onload = i.onerror = r; })));
 }
 window.KIT = {
-  list: () => Object.entries(designs).map(([id, d]) => ({ id, w: d.w, h: d.h, scale: d.scale || 1, transparent: !!d.transparent, pdf: d.pdf || null, carousel: !!d.carousel })),
+  list: () => Object.entries(designs).map(([id, d]) => ({ id, w: d.w, h: d.h, scale: d.scale || 1, transparent: !!d.transparent, pdf: d.pdf || null, carousel: d.carousel || false, dir: d.dir || null })),
   async design(id) {
     const d = designs[id];
     stage.style.width = d.w + 'px'; stage.style.height = d.h + 'px';

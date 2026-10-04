@@ -323,3 +323,138 @@ carouselSlides.forEach((fn, i) => {
     render(ctx) { const [role, pos, inner] = fn(ctx, 10.8); return slideBase(ctx, i, carouselSlides.length, inner, role, pos); },
   };
 });
+
+// =====================================================================
+// HVAC capability campaign  →  output/hvac-ads/
+// =====================================================================
+const hvHead = (ctx) => { const [a, b] = ctx.cfg.hvacAd.headline; return `${a}<br><span class="accent">${b}</span>`; };
+const hvTick = (u, [t, d], fs = 1) => `<div style="display:flex;gap:${1.6 * u}px;align-items:flex-start">
+  <div style="flex:none;width:${3 * u * fs}px;height:${3 * u * fs}px;border:2px solid var(--orange);display:grid;place-items:center;color:var(--orange-hi);font-weight:800;font-size:${1.8 * u * fs}px">✓</div>
+  <div><div style="font-family:Montserrat;font-weight:800;font-size:${2.4 * u * fs}px;text-transform:uppercase;letter-spacing:.02em">${t}</div>
+  <div style="font-size:${1.9 * u * fs}px;color:var(--mute);margin-top:${.3 * u}px">${d}</div></div></div>`;
+const hvCta = (ctx, u, h = 9) => `<div style="position:absolute;left:0;right:0;bottom:0;height:${h * u}px;background:var(--orange);display:flex;align-items:center;justify-content:space-between;padding:0 ${5 * u}px;color:#fff">
+  <span style="font-family:Montserrat;font-weight:800;font-size:${2.3 * u}px;letter-spacing:.02em">${ctx.cfg.hvacAd.cta}</span>
+  <span style="font-family:Montserrat;font-weight:800;font-size:${2.3 * u}px;letter-spacing:.06em;background:#fff;color:var(--orange-lo);padding:${.8 * u}px ${1.6 * u}px">${ctx.cfg.company.email} →</span></div>`;
+const hvChip = (u, t) => `<span style="display:inline-block;background:var(--orange);color:#fff;font-family:Montserrat;font-weight:800;font-size:${1.7 * u}px;letter-spacing:.2em;padding:${.5 * u}px ${1.2 * u}px">${t}</span>`;
+
+Object.assign(designs, {
+  'hvac-ad-square': { w: 1080, h: 1080, dir: 'hvac-ads', render(ctx) {
+    const u = 10.8, hv = ctx.cfg.hvacAd;
+    return `${bg(ctx, 'hvac', '35% 45%')}<div class="layer" style="background:linear-gradient(90deg,rgba(10,11,13,.95) 0%,rgba(10,11,13,.82) 45%,rgba(10,11,13,.1) 85%)"></div>
+      <div style="position:absolute;left:${6 * u}px;top:${5 * u}px">${logo(ctx, 11 * u)}</div>
+      <div style="position:absolute;left:${6 * u}px;top:${21 * u}px;width:${58 * u}px">
+        <div class="kicker" style="font-size:${1.9 * u}px">HVAC · E-Houses &amp; shelters</div>
+        <div class="disp" style="font-size:${7 * u}px;margin:${1.8 * u}px 0 ${2.2 * u}px">${hvHead(ctx)}</div>
+        <div style="font-size:${2.4 * u}px;line-height:1.45;color:var(--text)">${hv.sub}</div>
+        <div style="display:grid;gap:${1.6 * u}px;margin-top:${3.4 * u}px">${hv.features.slice(0, 3).map((f) => hvTick(u, f, .85)).join('')}</div>
+      </div>${hvCta(ctx, u)}`;
+  } },
+
+  'hvac-ad-portrait': { w: 1080, h: 1350, dir: 'hvac-ads', render(ctx) {
+    const u = 10.8, hv = ctx.cfg.hvacAd;
+    const panel = (role, pos, top, h, tagTxt, f) => `<div style="position:absolute;left:0;right:0;top:${top * u}px;height:${h * u}px;overflow:hidden" class="bg">${media(ctx, role, pos)}
+      <div class="layer" style="background:linear-gradient(180deg,rgba(10,11,13,0) 45%,rgba(10,11,13,.85) 100%)"></div>
+      <div style="position:absolute;left:${6 * u}px;bottom:${3 * u}px">${hvChip(u, tagTxt)}<div style="font-family:Montserrat;font-weight:800;font-size:${3.4 * u}px;margin-top:${1.2 * u}px;text-transform:uppercase">${f[0]}</div><div style="font-size:${2 * u}px;color:var(--text);margin-top:${.4 * u}px">${f[1]}</div></div></div>`;
+    return `<div class="layer" style="background:#0F1113"></div>
+      <div style="position:absolute;left:${6 * u}px;top:${4.5 * u}px">${logo(ctx, 10 * u)}</div>
+      <div class="disp" style="position:absolute;right:${6 * u}px;top:${5.5 * u}px;text-align:right;font-size:${5.6 * u}px">${hvHead(ctx)}</div>
+      ${panel('hvacIndoor', '55% 35%', 22, 44, 'INSIDE', hv.features[0])}
+      ${panel('hvac', '40% 45%', 66.5, 45, 'OUTSIDE', hv.features[1])}
+      ${hvCta(ctx, u, 13.5)}`;
+  } },
+
+  'hvac-ad-story': { w: 1080, h: 1920, dir: 'hvac-ads', render(ctx) {
+    const u = 10.8, hv = ctx.cfg.hvacAd;
+    return `${bg(ctx, 'hvacCeiling', '40% 50%')}<div class="layer" style="background:linear-gradient(180deg,rgba(10,11,13,.85) 0%,rgba(10,11,13,0) 18%,rgba(10,11,13,.1) 38%,rgba(10,11,13,.94) 58%,#0B0C0E 100%)"></div>
+      <div style="position:absolute;left:0;right:0;top:${6 * u}px;display:flex;justify-content:center">${logo(ctx, 16 * u)}</div>
+      <div style="position:absolute;left:${7 * u}px;right:${7 * u}px;top:${80 * u}px">
+        ${hvChip(u, 'HVAC · E-HOUSES')}
+        <div class="disp" style="font-size:${9.5 * u}px;margin:${2.2 * u}px 0">${hvHead(ctx)}</div>
+        <div style="font-size:${2.7 * u}px;line-height:1.45">${hv.sub}</div>
+        <div style="display:grid;gap:${1.6 * u}px;margin-top:${3.6 * u}px">${hv.features.map((f) => hvTick(u, f, .9)).join('')}</div>
+      </div>
+      <div style="position:absolute;left:${7 * u}px;right:${7 * u}px;bottom:${7 * u}px;background:var(--orange);text-align:center;padding:${2.4 * u}px;font-family:Montserrat;font-weight:800;font-size:${3 * u}px;letter-spacing:.06em">${ctx.cfg.company.email}</div>`;
+  } },
+
+  'hvac-ad-landscape': { w: 1200, h: 628, dir: 'hvac-ads', render(ctx) {
+    const u = 6.28, hv = ctx.cfg.hvacAd;
+    return `${bg(ctx, 'hvac', '30% 45%')}<div class="layer shade-l"></div>
+      <div style="position:absolute;left:${6 * u}px;top:${6 * u}px;width:${62 * u}px">
+        ${logo(ctx, 14 * u)}
+        <div class="kicker" style="font-size:${2.8 * u}px;margin-top:${6 * u}px">HVAC · E-Houses &amp; shelters</div>
+        <div class="disp" style="font-size:${10 * u}px;margin:${2 * u}px 0">${hvHead(ctx)}</div>
+        <div style="font-size:${3.2 * u}px;line-height:1.4">${hv.sub}</div>
+      </div>
+      <div style="position:absolute;left:${6 * u}px;bottom:${6 * u}px;background:var(--orange);padding:${1.6 * u}px ${2.6 * u}px;font-family:Montserrat;font-weight:800;font-size:${3 * u}px;letter-spacing:.06em">${ctx.cfg.company.email} →</div>`;
+  } },
+
+  'hvac-ad-drawing': { w: 1080, h: 1350, dir: 'hvac-ads', render(ctx) {
+    const u = 10.8, hv = ctx.cfg.hvacAd;
+    return `<div class="layer" style="${grid(u)}"></div>
+      <div style="position:absolute;left:${6 * u}px;top:${5 * u}px">${logo(ctx, 10 * u)}</div>
+      <div style="position:absolute;right:${6 * u}px;top:${5.5 * u}px;text-align:right"><div class="kicker" style="font-size:${1.8 * u}px">HVAC · designed in</div>
+        <div class="disp" style="font-size:${4.6 * u}px;margin-top:${.8 * u}px">From the GA drawing</div></div>
+      <div style="position:absolute;left:${4 * u}px;right:${4 * u}px;top:${19 * u}px;height:${40 * u}px">${dwg(ctx, 'planElevation')}</div>
+      <div class="mono" style="position:absolute;left:${6 * u}px;top:${60 * u}px;font-size:${1.6 * u}px;letter-spacing:.12em;color:var(--orange-hi)">A/C OUTDOOR × 3 — POSITIONS FIXED ON GA ${ctx.cfg.drawings.number.toUpperCase()}</div>
+      <div style="position:absolute;left:${6 * u}px;right:${6 * u}px;top:${65 * u}px;height:${30 * u}px;display:grid;grid-template-columns:1fr 1fr;gap:${1.2 * u}px">
+        <div style="position:relative;overflow:hidden" class="bg">${media(ctx, 'hvac', '40% 45%')}<div style="position:absolute;left:${1.2 * u}px;bottom:${1.2 * u}px">${hvChip(u, 'BUILT')}</div></div>
+        <div style="position:relative;overflow:hidden" class="bg">${media(ctx, 'hvacIndoor2', '50% 30%')}<div style="position:absolute;left:${1.2 * u}px;bottom:${1.2 * u}px">${hvChip(u, 'FITTED')}</div></div></div>
+      <div style="position:absolute;left:${6 * u}px;right:${6 * u}px;top:${98 * u}px;font-size:${2.4 * u}px;line-height:1.45">A/C positions, brackets, penetrations and power are planned on the GA drawing, then fabricated and fitted in one yard — no rework on site.</div>
+      ${hvCta(ctx, u, 12)}`;
+  } },
+
+  'hvac-ad-arabic': { w: 1080, h: 1080, dir: 'hvac-ads', render(ctx) {
+    const u = 10.8, hv = ctx.cfg.hvacAd;
+    return `${bg(ctx, 'hvac', '60% 45%')}<div class="layer" style="background:linear-gradient(270deg,rgba(10,11,13,.95) 0%,rgba(10,11,13,.82) 45%,rgba(10,11,13,.1) 85%)"></div>
+      <div style="position:absolute;right:${6 * u}px;top:${5 * u}px">${logo(ctx, 11 * u)}</div>
+      <div class="ar" style="position:absolute;right:${6 * u}px;top:${26 * u}px;width:${58 * u}px;text-align:right">
+        <div style="display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:${2.4 * u}px;padding:${.3 * u}px ${1.6 * u}px">تكييف · غرف كهربائية وملاجئ</div>
+        <div style="font-weight:800;font-size:${7.6 * u}px;line-height:1.2;margin:${2 * u}px 0">${hv.headlineAr}</div>
+        <div style="font-size:${2.7 * u}px;line-height:1.6">${hv.subAr}</div>
+        <div style="display:grid;gap:${1.4 * u}px;margin-top:${3 * u}px;font-weight:700;font-size:${2.6 * u}px">${hv.featuresAr.map((f) => `<div><span style="color:var(--orange-hi)">✓</span> ${f}</div>`).join('')}</div>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:${9 * u}px;background:var(--orange);display:flex;align-items:center;justify-content:center;font-family:Montserrat;font-weight:800;font-size:${2.6 * u}px;letter-spacing:.06em">${ctx.cfg.company.email}</div>`;
+  } },
+
+  // Display ad banners (rendered @2x)
+  'hvac-banner-300x250': { w: 300, h: 250, scale: 2, dir: 'hvac-ads', render(ctx) {
+    return `${bg(ctx, 'hvac', '35% 45%')}<div class="layer" style="background:linear-gradient(180deg,rgba(10,11,13,.55),rgba(10,11,13,.92) 70%)"></div>
+      <div style="position:absolute;left:16px;top:14px">${logo(ctx, 34)}</div>
+      <div class="disp" style="position:absolute;left:16px;right:16px;top:98px;font-size:26px">${hvHead(ctx)}</div>
+      <div style="position:absolute;left:16px;right:16px;top:160px;font-size:11px;line-height:1.35">Climate-controlled E-Houses, built in-house in Dammam.</div>
+      <div style="position:absolute;left:16px;bottom:14px;background:var(--orange);padding:6px 10px;font-family:Montserrat;font-weight:800;font-size:11px;letter-spacing:.05em">${ctx.cfg.company.email} →</div>`;
+  } },
+  'hvac-banner-728x90': { w: 728, h: 90, scale: 2, dir: 'hvac-ads', render(ctx) {
+    return `<div class="layer" style="background:#0F1113"></div><div class="layer bg" style="left:auto;width:210px">${media(ctx, 'hvac', '35% 45%')}</div>
+      <div class="layer" style="left:auto;width:210px;background:linear-gradient(90deg,#0F1113,rgba(15,17,19,0) 60%)"></div>
+      <div style="position:absolute;left:14px;top:50%;transform:translateY(-50%)">${logo(ctx, 52)}</div>
+      <div class="disp" style="position:absolute;left:140px;top:50%;transform:translateY(-50%);font-size:20px;line-height:1.05">Built for <span class="accent">the Gulf heat.</span><div style="font-family:Inter;font-weight:500;text-transform:none;font-size:10px;letter-spacing:0;margin-top:5px;color:var(--text)">Climate-controlled E-Houses · fabricated &amp; fitted-out in-house</div></div>
+      <div style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:var(--orange);padding:7px 10px;font-family:Montserrat;font-weight:800;font-size:11px;letter-spacing:.05em;box-shadow:0 2px 8px rgba(0,0,0,.4)">${ctx.cfg.company.email} →</div>`;
+  } },
+  'hvac-banner-160x600': { w: 160, h: 600, scale: 2, dir: 'hvac-ads', render(ctx) {
+    return `${bg(ctx, 'hvacIndoor', '55% 40%')}<div class="layer" style="background:linear-gradient(180deg,rgba(10,11,13,.9) 0%,rgba(10,11,13,.2) 30%,rgba(10,11,13,.5) 55%,rgba(10,11,13,.95) 75%)"></div>
+      <div style="position:absolute;left:0;right:0;top:16px;display:flex;justify-content:center">${logo(ctx, 52)}</div>
+      <div class="disp" style="position:absolute;left:12px;right:12px;top:380px;font-size:24px">${hvHead(ctx)}</div>
+      <div style="position:absolute;left:12px;right:12px;top:450px;font-size:11px;line-height:1.4">Climate-controlled E-Houses, built in-house in Dammam.</div>
+      <div style="position:absolute;left:12px;right:12px;bottom:16px;background:var(--orange);padding:8px 6px;text-align:center;font-family:Montserrat;font-weight:800;font-size:10px;letter-spacing:.03em">${ctx.cfg.company.email}</div>`;
+  } },
+});
+
+// HVAC carousel (separate PDF: output/hvac-ads/sws-hvac-carousel.pdf)
+const hvSlides = [
+  (ctx, u) => ['hvac', '35% 45%', `${hvChip(u, 'HVAC · E-HOUSES')}<div class="disp" style="font-size:${9.6 * u}px;margin:${2.6 * u}px 0">${hvHead(ctx)}</div><div style="font-size:${2.9 * u}px;line-height:1.4">How we build climate control into every shelter →</div>`],
+  (ctx, u) => ['hvacIndoor2', '50% 30%', hvPhase(ctx, u, 0, 1)],
+  (ctx, u) => ['hvac', '45% 45%', hvPhase(ctx, u, 1, 2)],
+  (ctx, u) => ['hvacCeiling', '40% 40%', `<div class="mono" style="font-size:${12 * u}px;color:var(--orange);line-height:1">03</div>${[2, 3].map((k) => `<div class="disp" style="font-size:${5.4 * u}px;margin-top:${1.6 * u}px">${ctx.cfg.hvacAd.features[k][0]}</div><div style="font-size:${2.7 * u}px;margin-top:${.6 * u}px">${ctx.cfg.hvacAd.features[k][1]}</div>`).join('')}`],
+  (ctx, u) => ['blueprint', 0, `<div class="kicker" style="font-size:${2.2 * u}px">Your next shelter</div><div class="disp" style="font-size:${7.2 * u}px;margin:${2 * u}px 0 ${3 * u}px">Climate control,<br><span class="accent">built in.</span></div><div style="font-family:Montserrat;font-weight:700;font-size:${3 * u}px;line-height:1.6">${ctx.cfg.company.email}</div><div style="font-family:Montserrat;font-weight:600;font-size:${1.9 * u}px;letter-spacing:.14em;color:var(--mute);margin-top:${2 * u}px;text-transform:uppercase">${ctx.cfg.company.credential}</div>`],
+];
+function hvPhase(ctx, u, k, n) {
+  const [t, d] = ctx.cfg.hvacAd.features[k];
+  return `<div class="mono" style="font-size:${12 * u}px;color:var(--orange);line-height:1">0${n}</div><div class="disp" style="font-size:${7.4 * u}px;margin:${1 * u}px 0 ${2 * u}px">${t}</div><div class="rule" style="font-size:${2.4 * u}px;margin-bottom:${2.4 * u}px"></div><div style="font-size:${3.2 * u}px;line-height:1.4">${d}</div>`;
+}
+hvSlides.forEach((fn, i) => {
+  designs[`hvac-carousel-${String(i + 1).padStart(2, '0')}`] = {
+    w: 1080, h: 1350, carousel: 'hvac', dir: 'hvac-ads',
+    render(ctx) { const [role, pos, inner] = fn(ctx, 10.8); return slideBase(ctx, i, hvSlides.length, inner, role, pos); },
+  };
+});

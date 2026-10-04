@@ -164,7 +164,10 @@
     "interiorWork": "assets/photos/interior-work.jpg",
     "yardSide": "assets/photos/yard-side.jpg",
     "fireCallpoint": "assets/photos/fire-callpoint.jpg",
-    "interiorInspection": "assets/photos/interior-inspection.jpg"
+    "interiorInspection": "assets/photos/interior-inspection.jpg",
+    "hvacIndoor": "assets/photos/hvac-indoor-unit.jpg",
+    "hvacIndoor2": "assets/photos/hvac-indoor-unit-2.jpg",
+    "hvacCeiling": "assets/photos/hvac-ceiling.jpg"
   },
   "drawings": {
     "_note": "Redacted GA drawings (client name and CAD path removed). Views exist as <name>-ink.png (dark lines) and <name>-light.png (light lines), transparent background.",
@@ -178,5 +181,50 @@
     "skidPlan": "assets/drawings/ga-skid-plan",
     "skidElevation": "assets/drawings/ga-skid-elevation",
     "sectionAA": "assets/drawings/ga-section-aa"
+  },
+  "hvacAd": {
+    "_note": "HVAC capability campaign. Claims are limited to what the SCADA Room project shows; no unit brands, no client names.",
+    "headline": [
+      "Built for",
+      "the Gulf heat."
+    ],
+    "sub": "Climate-controlled E-Houses and shelters — fabricated, insulated and fitted-out in-house in Dammam.",
+    "features": [
+      [
+        "Split A/C, factory-fitted",
+        "3 units on our latest 40 ft SCADA Room"
+      ],
+      [
+        "Guarded outdoor units",
+        "Skid-mounted brackets with protective mesh"
+      ],
+      [
+        "Insulated envelope",
+        "Sandwich wall panels hold the cold in"
+      ],
+      [
+        "Power & services",
+        "A/C circuits, conduit and cable trays in one fit-out"
+      ]
+    ],
+    "cta": "Planning a climate-controlled E-House?",
+    "headlineAr": "مصممة لحرارة الخليج",
+    "subAr": "غرف كهربائية وملاجئ مكيفة — تصنيع وعزل وتجهيز داخل مصنعنا في الدمام",
+    "featuresAr": [
+      "تكييف سبليت مركّب في المصنع",
+      "وحدات خارجية محمية بشبك",
+      "ألواح جدران معزولة",
+      "تمديدات كهربائية متكاملة"
+    ],
+    "hashtags": [
+      "#HVAC",
+      "#EHouse",
+      "#ClimateControl",
+      "#SteelFabrication",
+      "#OilAndGas",
+      "#Dammam",
+      "#SaudiArabia",
+      "#SWS"
+    ]
   }
 }

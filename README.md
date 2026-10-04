@@ -38,8 +38,24 @@ Film storyboard: Logo reveal → Title → 01 Engineering (the real GA drawings 
 | `carousel-01…09` + `linkedin-carousel.pdf` | 1080×1350 | LinkedIn document carousel (upload the PDF) |
 | `frame-overlay-16x9`, `frame-overlay-4x5`, `watermark-corner` | transparent PNG | Brand frames to put over real photos |
 
+### HVAC capability campaign (`output/hvac-ads/`)
+Adverts for SWS's climate-controlled E-House capability, built from the real HVAC photos. Unit brand marks are masked and there are no client names.
+
+| File | Size | Use |
+|---|---|---|
+| `sws-hvac-ad-16x9.mp4` / `-9x16.mp4` / `-1x1.mp4` | ~23 s | Video ads: LinkedIn, Reels/Stories, feed |
+| `sws-hvac-ad-square` | 1080×1080 | Feed ad |
+| `sws-hvac-ad-portrait` | 1080×1350 | Inside/outside split ad |
+| `sws-hvac-ad-story` | 1080×1920 | Story ad |
+| `sws-hvac-ad-landscape` | 1200×628 | LinkedIn/Facebook link ad, Google Display |
+| `sws-hvac-ad-drawing` | 1080×1350 | "From the GA drawing" (real drawing + photos) |
+| `sws-hvac-ad-arabic` | 1080×1080 | Arabic ad |
+| `sws-hvac-banner-300x250` / `728x90` / `160x600` | @2× | Google Display banners |
+| `sws-hvac-carousel-01…05` + `sws-hvac-carousel.pdf` | 1080×1350 | LinkedIn document carousel |
+| `hvac-ad-copy.md` | — | Ad copy (LinkedIn, Instagram, Arabic, Google Ads headlines and descriptions) and rollout plan |
+
 ### Branded site photos (`output/branded/`)
-All 26 curated project photos with the SWS logo frame, in 16:9 and 4:5.
+All 29 curated project photos with the SWS logo frame, in 16:9 and 4:5.
 
 `output/captions.md` has ready-to-post copy (LinkedIn company and personal, Instagram, Arabic) and a 2-week posting sequence.
 

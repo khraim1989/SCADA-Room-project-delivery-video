@@ -13,6 +13,9 @@ const FILMS = [
   { name: 'feed-1x1', w: 1080, h: 1080, timeline: 'short' },
   { name: 'feed-4x5', w: 1080, h: 1350, timeline: 'short' },
   { name: 'logo-sting-16x9', w: 1920, h: 1080, timeline: 'sting' },
+  { name: 'hvac-ad-16x9', w: 1920, h: 1080, timeline: 'hvac', dir: 'hvac-ads' },
+  { name: 'hvac-ad-9x16', w: 1080, h: 1920, timeline: 'hvac', dir: 'hvac-ads' },
+  { name: 'hvac-ad-1x1', w: 1080, h: 1080, timeline: 'hvac', dir: 'hvac-ads' },
 ];
 const args = process.argv.slice(2);
 const preview = args.includes('--preview');
@@ -44,7 +47,9 @@ for (const f of FILMS) {
   const outro = info.scenes.find((s) => s[0] === 'outro');
   makeMusic(wav, info.total, { hits: [0.55, ...(outro ? [outro[1] + 0.1] : [])] });
 
-  const mp4 = path.join(OUT, `sws-scada-${f.name}.mp4`);
+  const outDir = f.dir ? path.join(ROOT, 'output', f.dir) : OUT;
+  fs.mkdirSync(outDir, { recursive: true });
+  const mp4 = path.join(outDir, f.dir ? `sws-${f.name}.mp4` : `sws-scada-${f.name}.mp4`);
   const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'mjpeg', '-i', '-',
     '-i', wav, '-map', '0:v', '-map', '1:a', '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-pix_fmt', 'yuv420p',
     '-movflags', '+faststart', '-c:a', 'aac', '-b:a', '192k', '-shortest', mp4], { stdio: ['pipe', 'inherit', 'inherit'] });

@@ -168,6 +168,54 @@ const SC = {
         <div style="${rv(lt, .9)};font-family:Montserrat;font-weight:600;font-size:${px(2.7)};letter-spacing:.06em;margin-top:${px(3)};color:#3A424B">${c.email}</div>
         <div style="${rv(lt, 1.15)};font-family:Montserrat;font-weight:700;font-size:${px(2.2)};letter-spacing:.16em;text-transform:uppercase;margin-top:${px(2.2)};color:var(--orange)">${c.credential} &nbsp;·&nbsp; ${c.cr}</div></div>`;
   },
+  // ---------- HVAC capability ad ----------
+  // extra bottom shade so the phase numbers stay readable over bright interior shots (non-landscape)
+  _hvShade() { return S.fmt === 'land' ? '' : '<div class="layer" style="background:linear-gradient(180deg,rgba(10,11,13,0) 35%,rgba(10,11,13,.65) 62%)"></div>'; },
+  hvTitle(lt, d) {
+    const hv = S.ctx.cfg.hvacAd, land = S.fmt === 'land';
+    const pos = land ? `left:${px(7)};bottom:${px(10)}` : `left:${px(7)};right:${px(7)};bottom:${px(S.fmt === 'port' ? 18 : 10)}`;
+    return `${slideshow(lt, d, [['hvac', '35% 45%', -1]], controlRoom({ t: lt, id: 'hv' }))}
+      <div class="layer" style="background:linear-gradient(${land ? '90deg' : '180deg'},rgba(10,11,13,${land ? .95 : 0}) 0%,rgba(10,11,13,${land ? .75 : .1}) ${land ? 42 : 45}%,rgba(10,11,13,${land ? 0 : .95}) ${land ? 72 : 85}%)"></div>
+      <div style="position:absolute;${pos}">
+        <div class="badge" style="${rv(lt, .2)};font-size:${px(2.4)}">HVAC · E-Houses &amp; Shelters</div>
+        <div class="disp" style="${rv(lt, .4)};font-size:${px(land ? 11.5 : 11)};margin-top:${px(3)}">${hv.headline[0]}<br><span class="accent">${hv.headline[1]}</span></div>
+        <div style="${rv(lt, .8)};font-size:${px(2.8)};margin-top:${px(3)};max-width:${px(land ? 62 : 90)};line-height:1.4">${hv.sub}</div></div>${bug(lt)}`;
+  },
+  hvInside(lt, d) {
+    const f = S.ctx.cfg.hvacAd.features[0];
+    return slideshow(lt, d, [['hvacIndoor', '55% 35%', 1], ['hvacIndoor2', '50% 30%', -1]], controlRoom({ t: lt, id: 'hi' })) + SC._hvShade() + label(lt, '01', f[0], f[1]) + bug(1);
+  },
+  hvOutside(lt, d) {
+    const f = S.ctx.cfg.hvacAd.features[1];
+    return slideshow(lt, d, [['hvac', '40% 45%', 1], ['threeQuarter', '65% 50%', -1]], controlRoom({ t: lt, id: 'ho' })) + SC._hvShade() + label(lt, '02', f[0], f[1]) + bug(1);
+  },
+  hvDrawing(lt, d) {
+    const dw = S.ctx.cfg.drawings, land = S.fmt === 'land';
+    const geo = land ? 'left:30%;top:9%;width:66%;height:70%' : S.fmt === 'sq' ? 'left:5%;top:12%;width:90%;height:52%' : 'left:4%;top:13%;width:92%;height:48%';
+    const k = ease(clamp((lt - .15) / 1.8));
+    return `<div class="layer" style="background:#111418"></div>
+      <div class="layer" style="background-image:linear-gradient(rgba(232,78,14,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(232,78,14,.07) 1px,transparent 1px);background-size:${px(10)} ${px(10)}"></div>
+      <div style="position:absolute;${geo};transform:scale(${(1 + .05 * clamp(lt / d)).toFixed(4)})"><img src="../${dw.planElevation}-light.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;clip-path:inset(0 ${((1 - k) * 100).toFixed(2)}% 0 0)"></div>`
+      + label(lt, '03', 'Designed in', 'A/C positions fixed on the GA drawing — not added on site')
+      + `<div class="mono" style="position:absolute;left:${px(4)};top:${px(4.2)};opacity:${clamp((lt - .4) / .4)};font-size:${px(1.9)};letter-spacing:.12em;color:var(--orange-hi);border:1px solid rgba(255,138,76,.5);padding:${px(.6)} ${px(1.2)};background:rgba(10,11,13,.6)">GA ${dw.number.toUpperCase()} · A/C OUTDOOR × 3</div>` + bug(1);
+  },
+  hvServices(lt, d) {
+    const [a, b] = S.ctx.cfg.hvacAd.features.slice(2);
+    return slideshow(lt, d, [['hvacCeiling', '40% 45%', 1], ['interior', '50% 45%', -1]], controlRoom({ t: lt, id: 'hs' })) + SC._hvShade() + label(lt, '04', a[0], `${a[1]} · ${b[0].toLowerCase()} in one fit-out`) + bug(1);
+  },
+  hvCta(lt, d) {
+    const c = S.ctx.cfg.company, hv = S.ctx.cfg.hvacAd, land = S.fmt === 'land';
+    const squat = !land && S.H / S.W < 1.5;
+    return `<div class="layer" style="background:var(--paper)"></div>
+      <div class="layer" style="top:auto;height:${px(1.2)};background:linear-gradient(90deg,var(--blue) 0%,var(--blue) 70%,var(--orange) 70%)"></div>
+      <div style="position:absolute;left:0;right:0;top:${land ? '30%' : squat ? '28%' : '32%'};transform:translateY(-50%);display:flex;justify-content:center;${rv(lt, .1, .9, 2)}">
+        <img class="logo" src="../${c.logos.onLight}" style="width:${px(land ? 50 : squat ? 46 : 72)}"></div>
+      <div style="position:absolute;left:${px(6)};right:${px(6)};top:${land ? '58%' : squat ? '55%' : '56%'};text-align:center;color:var(--char)">
+        <div class="disp" style="${rv(lt, .5)};font-size:${px(land ? 5.6 : 5)};color:var(--blue)">Climate control,${land ? ' ' : '<br>'}<span style="color:var(--orange)">built in.</span></div>
+        <div style="${rv(lt, .8)};font-family:Montserrat;font-weight:700;font-size:${px(2.6)};margin-top:${px(2.4)};color:#3A424B">${hv.cta}</div>
+        <div style="${rv(lt, 1.05)};display:inline-block;margin-top:${px(3)};background:var(--orange);color:#fff;font-family:Montserrat;font-weight:800;font-size:${px(3.2)};letter-spacing:.06em;padding:${px(1.4)} ${px(3)}">${c.email}</div>
+        <div style="${rv(lt, 1.3)};font-family:Montserrat;font-weight:700;font-size:${px(2)};letter-spacing:.16em;text-transform:uppercase;margin-top:${px(2.6)};color:var(--orange)">${c.credential}</div></div>`;
+  },
 };
 
 // Timelines (seconds). Scenes overlap by XF for cross-dissolves.
@@ -176,6 +224,7 @@ const TIMELINES = {
   full: [['intro', 4.5], ['title', 6], ['engineering', 5.5], ['fabrication', 8], ['fitout', 8], ['inspection', 5.5], ['loadout', 9], ['stats', 6.5], ['team', 5], ['outro', 6]],
   short: [['intro', 3.2], ['title', 4.0], ['engineering', 4.4], ['fabrication', 4.2], ['fitout', 3.8], ['loadout', 5.2], ['stats', 4.4], ['team', 3.2], ['outro', 4.2]],
   sting: [['intro', 5]],
+  hvac: [['intro', 3.0], ['hvTitle', 4.2], ['hvInside', 3.8], ['hvOutside', 3.8], ['hvDrawing', 3.8], ['hvServices', 3.6], ['hvCta', 4.6]],
 };
 
 export const film = {
