@@ -1,0 +1,56 @@
+/* SWS SCADA Room media kit — shared tokens & components */
+@font-face { font-family: Montserrat; font-weight: 400; src: url(../assets/fonts/montserrat-latin-400-normal.woff2); }
+@font-face { font-family: Montserrat; font-weight: 600; src: url(../assets/fonts/montserrat-latin-600-normal.woff2); }
+@font-face { font-family: Montserrat; font-weight: 700; src: url(../assets/fonts/montserrat-latin-700-normal.woff2); }
+@font-face { font-family: Montserrat; font-weight: 800; src: url(../assets/fonts/montserrat-latin-800-normal.woff2); }
+@font-face { font-family: Montserrat; font-weight: 900; src: url(../assets/fonts/montserrat-latin-900-normal.woff2); }
+@font-face { font-family: Inter; font-weight: 400; src: url(../assets/fonts/inter-latin-400-normal.woff2); }
+@font-face { font-family: Inter; font-weight: 500; src: url(../assets/fonts/inter-latin-500-normal.woff2); }
+@font-face { font-family: Inter; font-weight: 600; src: url(../assets/fonts/inter-latin-600-normal.woff2); }
+@font-face { font-family: Cairo; font-weight: 400; src: url(../assets/fonts/cairo-arabic-400-normal.woff2); }
+@font-face { font-family: Cairo; font-weight: 700; src: url(../assets/fonts/cairo-arabic-700-normal.woff2); }
+@font-face { font-family: Cairo; font-weight: 800; src: url(../assets/fonts/cairo-arabic-800-normal.woff2); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: url(../assets/fonts/jetbrains-mono-latin-400-normal.woff2); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 600; src: url(../assets/fonts/jetbrains-mono-latin-600-normal.woff2); }
+
+:root {
+  --ink: #0F1113; --char: #1B1F23; --char2: #262B31; --steel: #3A424B; --mute: #9AA3AC;
+  --text: #F4F1EA; --paper: #F6F4EF;
+  --orange: #E84E0E; --orange-hi: #FF8A4C; --orange-lo: #A8360A;
+  --blue: #0E4194; --blue-hi: #4C8DF0; --blue-deep: #0A2B63;
+  --ok: #4FD1A1;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #000; }
+body { font-family: Inter, sans-serif; color: var(--text); -webkit-font-smoothing: antialiased; }
+
+#stage { position: relative; overflow: hidden; background: var(--char); }
+.layer { position: absolute; inset: 0; }
+.bg > svg, .bg > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.shade-b { background: linear-gradient(180deg, rgba(10,11,13,0) 22%, rgba(10,11,13,.9) 52%, rgba(10,11,13,.97) 100%); }
+.shade-t { background: linear-gradient(180deg, rgba(10,11,13,.94) 0%, rgba(10,11,13,.7) 16%, rgba(10,11,13,0) 34%); }
+.shade-l { background: linear-gradient(90deg, rgba(10,11,13,.96) 0%, rgba(10,11,13,.85) 38%, rgba(10,11,13,0) 70%); }
+.shade-all { background: rgba(10,11,13,.55); }
+
+.logo { display: block; height: auto; }
+.disp { font-family: Montserrat, sans-serif; font-weight: 900; line-height: .98; letter-spacing: -.01em; text-transform: uppercase; }
+.kicker { font-family: Montserrat, sans-serif; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; color: var(--orange-hi); }
+.mono { font-family: 'JetBrains Mono', monospace; }
+.ar { font-family: Cairo, sans-serif; direction: rtl; }
+.accent { color: var(--orange); }
+.blue { color: var(--blue-hi); }
+.rule { height: .35em; width: 3.2em; background: linear-gradient(90deg, var(--orange), var(--orange-hi)); }
+.chip { display: inline-block; border: 1px solid rgba(255,255,255,.22); background: rgba(14,65,148,.35); padding: .45em .9em; border-radius: 2em; font-family: Montserrat; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.badge { display: inline-flex; align-items: center; gap: .5em; background: var(--orange); color: #fff; font-family: Montserrat; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; padding: .5em 1em; }
+.footer { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: space-between; background: rgba(8,9,10,.92); border-top: 3px solid var(--orange); font-family: Montserrat; font-weight: 600; letter-spacing: .08em; color: var(--mute); text-transform: uppercase; }
+.footer b { color: var(--text); font-weight: 700; }
+.stat .v { font-family: Montserrat; font-weight: 900; line-height: 1; color: var(--text); }
+.stat .l { font-family: Montserrat; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.stat { border-left: 4px solid var(--orange); }
+.hex { clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
+.corner { position: absolute; width: 6%; aspect-ratio: 1; border-color: var(--orange); border-style: solid; border-width: 0; }
+.corner.tl { top: 3%; left: 3%; border-top-width: 4px; border-left-width: 4px; }
+.corner.tr { top: 3%; right: 3%; border-top-width: 4px; border-right-width: 4px; }
+.corner.bl { bottom: 3%; left: 3%; border-bottom-width: 4px; border-left-width: 4px; }
+.corner.br { bottom: 3%; right: 3%; border-bottom-width: 4px; border-right-width: 4px; }
+.verify::after { content: ''; }

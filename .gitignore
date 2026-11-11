@@ -1,0 +1,4 @@
+node_modules
+output/video/.music-*.wav
+output/video/preview-*
+.DS_Store

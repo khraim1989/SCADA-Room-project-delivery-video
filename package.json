@@ -1,0 +1,11 @@
+{
+  "name": "sws-scada-room-media-kit",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "photos": "node scripts/render-photos.mjs",
+    "video": "node scripts/render-video.mjs",
+    "brand-photos": "node scripts/brand-photos.mjs",
+    "build": "node scripts/render-photos.mjs && node scripts/render-video.mjs"
+  }
+}
